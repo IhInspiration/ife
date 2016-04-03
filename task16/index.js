@@ -53,11 +53,16 @@ function renderAqiList() {
         aqiList += '<tr><td>' + property + '</td><td>' + aqiData[property] + '</td><td><button>删除</button></td></tr>';
         len++;
     }
+    //console.log(list.innerHTML);
+    //console.log(len);
+    //console.log(aqiData);
     if(len > 0){
         list.innerHTML = '<tr><th>城市</th><th>空气质量</th><th>操作</th></tr>' + aqiList;
+        //console.log(list.innerHTML);
         addBtnDel();
     }else{
         list.innerHTML = '';
+        //console.log(list.innerHTML);
     }
 
 }
@@ -77,8 +82,10 @@ function addBtnHandle() {
  */
 function delBtnHandle(ele) {
     // do sth.
-    var delCity = ele.parentNode.parentNode.firstChild.innerText;
+    var delCity = ele.parentNode.parentNode.firstChild.innerHTML;
+    console.log(delCity);
     delete aqiData[delCity];
+    console.log(aqiData);
     renderAqiList();
 }
 
@@ -101,4 +108,5 @@ function addBtnDel(){
     }
 
 }
+
 init();
