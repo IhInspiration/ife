@@ -2,6 +2,9 @@
  * Created by lenovo on 2016/4/2.
  * @author jackwang <wdmzjjm@163.com>
  */
+/*
+* 目前问题：IE低版本关于innerHTML的问题
+* */
 /**
  * aqiData，存储用户输入的空气指数数据
  * 示例格式：
@@ -12,7 +15,7 @@
  */
 var aqiData = {};
 
-//IE7-8中tirm属性兼容
+//IE7-8中trim属性兼容
 String.prototype.trim = function(){
     return this.replace(/(^\s*)|(\s*$)/g, "");
 };
