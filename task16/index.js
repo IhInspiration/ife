@@ -53,16 +53,11 @@ function renderAqiList() {
         aqiList += '<tr><td>' + property + '</td><td>' + aqiData[property] + '</td><td><button>删除</button></td></tr>';
         len++;
     }
-    //console.log(list.innerHTML);
-    //console.log(len);
-    //console.log(aqiData);
     if(len > 0){
         list.innerHTML = '<tr><th>城市</th><th>空气质量</th><th>操作</th></tr>' + aqiList;
-        //console.log(list.innerHTML);
         addBtnDel();
     }else{
         list.innerHTML = '';
-        //console.log(list.innerHTML);
     }
 
 }
@@ -83,18 +78,14 @@ function addBtnHandle() {
 function delBtnHandle(ele) {
     // do sth.
     var delCity = ele.parentNode.parentNode.firstChild.innerHTML;
-    console.log(delCity);
     delete aqiData[delCity];
-    console.log(aqiData);
     renderAqiList();
 }
 
 function init() {
     // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
     var addBtn = document.getElementById('add-btn');
-    addBtn.addEventListener('click', function(){
-        addBtnHandle();
-    },false);
+    bindEvent(addBtn, 'click', function(){addBtnHandle();});
 }
 
 function addBtnDel(){
@@ -102,11 +93,20 @@ function addBtnDel(){
     var deleteBtn = document.getElementById('aqi-table').getElementsByTagName('button'),
         len = deleteBtn.length;
     for(var i = 0; i < len; i++){
-        deleteBtn[i].addEventListener('click', function(){
-            delBtnHandle(this);
-        },false);
+        bindEvent(deleteBtn[i], 'click',function(){delBtnHandle(this);});
     }
 
+}
+//事件绑定
+function bindEvent(ele, event, func){
+    if(window.addEventListener){
+        ele.addEventListener(event, func ,false);
+
+    }else if(window.attachEvent){
+        ele.attachEvent('on' + event, func);
+    }else{
+        ele['on' + type] = func;
+    }
 }
 
 init();
