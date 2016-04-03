@@ -12,6 +12,11 @@
  */
 var aqiData = {};
 
+//IE7-8中tirm属性兼容
+String.prototype.trim = function(){
+    return this.replace(/(^\s*)|(\s*$)/g, "");
+};
+
 /**
  * 从用户输入中获取数据，向aqiData中增加一条数据
  * 然后渲染aqi-list列表，增加新增的数据
